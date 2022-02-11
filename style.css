@@ -16,3 +16,10 @@
   box-sizing: border-box;
   background-color: black;
 }
+
+h1 {
+  font-family: 'get_schwiftyregular';
+  font-weight: normal;
+  font-style: normal;
+  color: var(--verde);
+}
