@@ -19,5 +19,8 @@
   "homepage": "https://github.com/GabrielFerrariR/Undefined-Bonus-project#readme",
   "devDependencies": {
     "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "rickmortyapi": "^1.0.0"
   }
 }
