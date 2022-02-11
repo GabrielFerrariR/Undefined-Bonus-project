@@ -14,12 +14,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: black;
+  background-color: var(--verde);
 }
 
 h1 {
   font-family: 'get_schwiftyregular';
   font-weight: normal;
   font-style: normal;
-  color: var(--verde);
+  color: var(--azul);
 }
