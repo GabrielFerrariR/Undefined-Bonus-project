@@ -15,7 +15,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-body {
+body, html {
   background-color: black;
 }
 .Title-logo {
@@ -41,4 +41,30 @@ h1 {
   text-shadow: 0px 0px 6px #98c65e;
   -webkit-text-stroke-width: 0.5px;
   -webkit-text-stroke-color: #1e2b10;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top:30px;
+}
+.question-container, .img-container, .answer {
+  background-color: #01afc8;
+  width: 70%;
+}
+.question-container {
+  display: flex;
+  max-height: 200px;
+}
+.img-container {
+  background-color: #d4cabe;
+  width: 30%;
+  height: 200px;
+}
+#portal-gun {
+  float:right;
+  height: 40px;
+}
+.answer {
+  background-color: #1e2b10;
 }
