@@ -1,0 +1,23 @@
+{
+  "name": "Undefined-Bonus-project",
+  "version": "1.0.0",
+  "description": "Projeto bônus produzido ao final do módulo de Fundamentos do Desenvolvimento Web da Trybe.",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GabrielFerrariR/Undefined-Bonus-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GabrielFerrariR/Undefined-Bonus-project/issues"
+  },
+  "homepage": "https://github.com/GabrielFerrariR/Undefined-Bonus-project#readme",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}
