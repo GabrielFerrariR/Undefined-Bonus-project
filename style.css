@@ -1,7 +1,18 @@
+:root {
+  --azul: #01afc8;
+  --verde: #98c65e;
+  --branco: #fffdfc;
+  --amarelo: #faf174;
+  --azul2: #99d6d8;
+  --verde2: #338a43;
+  --azul3: #1d2045;
+  --laranja: #f68d1e;
+  --bege: #fac59e;
+  --bege: #d4cabe;
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: black;
 }
-
