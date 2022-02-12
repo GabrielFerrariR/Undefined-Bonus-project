@@ -3,6 +3,13 @@ const numOfCharacters = 826;
 const numOfLocations = 126;
 const numOfEpisodes = 51;
 
+const generateRandomNumber = (maxNum) => {
+  const min = 1;
+  const max = maxNum;
+  const numSorted = Math.floor(Math.random() * (max - min + 1)) + min;
+  return numSorted;
+}
+
 const fetchData = async (data, id) => {
   const url = `${urlBase}${data}/${id}`;
   console.log(url);
