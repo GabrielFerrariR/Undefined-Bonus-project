@@ -20,6 +20,10 @@ body, html {
   background-color: black;
 }
 
+main {
+  margin-top: 100px;
+}
+
 .Title-logo {
   display: flex;
   flex-direction: column;
@@ -116,6 +120,7 @@ footer {
   height: 200px;
   align-items: flex-end;
   opacity: 0.7;
+  margin-top: 50px;
 }
 
 footer img {
@@ -125,4 +130,46 @@ footer img {
 footer p {
   color: var(--verde);
   font-size: 1rem;
+}
+
+.selected {
+  background-color: var(--azul2);
+}
+
+hr {
+  background-color: var(--verde);
+  height: 1px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-conatiner img {
+  height: 80px;
+  cursor: pointer;
+}
+
+.nav-conatiner p {
+  font-family: 'get_schwiftyregular';
+  font-weight: normal;
+  font-style: normal;
+  color: var(--azul);
+  font-size: 1.8rem;
+  color: var(--azul);
+  text-shadow: 0px 0px 6px #98c65e;
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: #1e2b10;
+}
+
+.nav-conatiner {
+  display: flex;
+  flex-wrap: wrap;
+  width: 120px;
+  justify-content: center;
+}
+
+.nav-conatiner img:hover {
+  height: 100px;
 }
