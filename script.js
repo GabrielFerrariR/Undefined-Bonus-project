@@ -2,6 +2,9 @@ const urlBase = "https://rickandmortyapi.com/api/";
 const numOfCharacters = 826;
 const numOfLocations = 126;
 const numOfEpisodes = 51;
+const questionElement = document.getElementById('question-text');
+const answerElement = document.getElementsByClassName('answer');
+const charImgElement = document.getElementsByClassName('img-container');
 
 const fetchData = async (data, id) => {
   const url = `${urlBase}${data}/${id}`;
