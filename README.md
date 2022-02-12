@@ -13,4 +13,4 @@ Projeto bônus produzido ao final do módulo de Fundamentos do Desenvolvimento W
 - As alternativas devem aparecer do formato: "Nome do episodio- S0E0.
 - Apenas uma alternativa deve ser a verdadeira.
 - As altenativas devem ser puxadas da API.
-- Deve haver uma imagem 
+- Deve haver uma imagem exemplificando o personagem.
