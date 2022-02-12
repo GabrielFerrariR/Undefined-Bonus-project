@@ -16,3 +16,8 @@
   box-sizing: border-box;
   background-color: black;
 }
+
+#loading-data {
+  color: #d4cabe;
+  font-size: xx-large;
+}
