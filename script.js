@@ -6,6 +6,13 @@ const questionElement = document.getElementById('question-text');
 const answerElement = document.getElementsByClassName('answer');
 const charImgElement = document.getElementsByClassName('img-container');
 
+const generateRandomNumber = (maxNum) => {
+  const min = 1;
+  const max = maxNum;
+  const numSorted = Math.floor(Math.random() * (max - min + 1)) + min;
+  return numSorted;
+}
+
 const fetchData = async (data, id) => {
   const url = `${urlBase}${data}/${id}`;
   console.log(url);
