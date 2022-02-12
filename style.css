@@ -43,6 +43,11 @@ header {
   background-color: black;
 }
 
+#loading-data {
+  color: #d4cabe;
+  font-size: xx-large;
+}
+  
 h1 {
   font-family: 'get_schwiftyregular';
   font-weight: normal;
