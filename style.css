@@ -43,6 +43,11 @@ header {
   background-color: black;
 }
 
+#loading-data {
+  color: #d4cabe;
+  font-size: xx-large;
+}
+  
 h1 {
   font-family: 'get_schwiftyregular';
   font-weight: normal;
@@ -121,6 +126,7 @@ footer {
   align-items: flex-end;
   opacity: 0.7;
   margin-top: 50px;
+
 }
 
 footer img {
@@ -172,4 +178,5 @@ nav {
 
 .nav-conatiner img:hover {
   height: 100px;
+  
 }
