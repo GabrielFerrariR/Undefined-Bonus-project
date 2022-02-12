@@ -58,5 +58,4 @@ const getAllData = () => {
 }
 
 window.onload = () => {
- getAllData();
 }
