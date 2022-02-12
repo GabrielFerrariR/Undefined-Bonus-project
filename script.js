@@ -7,24 +7,6 @@ const characters = [];
 const locations = [];
 const episodes = [];
 
-
-/* const fetchData = async (option) => {
-  const url = `${urlBase}${option}`;
-
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch(error) {
-    return `Algo deu errado :( \n${error}`;
-  }
-}
-
-fetchData('character').then((data) => {
-  characters = data;
-  console.log(characters);
-}); */
-
 const getData = (data, total, callback) => {
   const url = `${urlBase}${data}`;
   console.log(url);
@@ -62,7 +44,7 @@ const getAllData = () => {
     getData('location', numOfLocations, getLocations);
     getData('episode', numOfEpisodes, getEpisodes);
     const timeLoading = Math.round((Date.now() - startTime)/1000);
-    console.log(`Levou ${timeLoading} segundo para caregar a API`);
+    console.log(`Levou ${timeLoading} segundos para carregar a API`);
     
     //retirar mensagem de loading data
     body.removeChild(p);
@@ -77,29 +59,4 @@ const getAllData = () => {
 
 window.onload = () => {
  getAllData();
-}  
-  
-
-/* const getAllData = () => {
-  // colocar mensagem de loading data
-  const body = document.getElementsByTagName('body')[0];
-  const p = document.createElement('p');
-  p.id = 'loading-data';  
-  p.innerText = 'Carregando dados...'
-  body.appendChild(p);
-  
-  // recebendo todos os dados
-  getData('character', characters);
-  getData('location', locations);
-  getData('episode', episodes); 
- 
-  // retirar mensagem de loading data
-  //console.log(body.firstElementChild);
-  //console.log(body.firstElement);
-  //body.removeChild(p);
 }
-
-getAllData();
-console.log(characters);
-console.log(locations);
-console.log(episodes); */
