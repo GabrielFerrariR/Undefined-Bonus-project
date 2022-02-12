@@ -36,7 +36,8 @@ const generateQuestion = async () => {
   questionElement.innerText = `O personagem ${name} apareceu pela primeira vez no episódio:`;
   const img = generateImg('img', image);
   charImgElement.appendChild(img);
-}  
+}
+  
 window.onload = async () => {
   fetchData('character', 1).then((data) => console.log(data));
   await generateQuestion();
