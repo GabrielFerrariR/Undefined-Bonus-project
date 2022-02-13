@@ -85,8 +85,12 @@ h2 {
 }
 
 .img-container {
+<<<<<<< HEAD
   background-color: #d4cabe;
   width: 200px;
+=======
+  width: 30%;
+>>>>>>> e90c12b0f51ddd08d1f60a8c3fb3d572bff3b805
   height: 200px;
 }
 
