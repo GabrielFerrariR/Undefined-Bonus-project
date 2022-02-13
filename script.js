@@ -149,7 +149,13 @@ const episodeVerify = (event) => {
     cont -= 1;
     cont2+=1;
   }
-
+  //Cria botão com a opção de jogar novamente após finalização da partida
+  const createBtn = () => {
+    const btn = document.createElement('button');
+    btn.innerText = 'Jogar novamente';
+    btn.className = 'btn';
+    ansContainer.appendChild(btn);
+  };
   // enquanto nao foi as 10 questoes apos escolher uma alternativa limpa a foto e as questoes e chama uma nova foto e novas questoes
   if (cont2 < 10 ) {
   limparFoto();
@@ -159,15 +165,15 @@ const episodeVerify = (event) => {
   else{ // quando finalizar as 10 questoes aparece uma frase de acordo com a pontuaçao
     if (cont < 1) {
     questionElement.innerText = `Você foi muito mal, ta parecendo um Jerry`;
-   limparFoto()
-   limparQuestoes();
-   const chulambes= document.createElement('img');
-   chulambes.src = './img/r24.gif';
-   chulambes.style.height = "500px";
-   chulambes.style.width = "600px";
-   charImgElement.appendChild(chulambes);
-  
-    } else
+    limparFoto()
+    limparQuestoes();
+    const chulambes= document.createElement('img');
+    chulambes.src = './img/r24.gif';
+    chulambes.style.height = "500px";
+    chulambes.style.width = "600px";
+    charImgElement.appendChild(chulambes);
+    createBtn();
+  } else
     if (cont > 1 && cont < 6) {
       questionElement.innerText = `Você foi até razoavel, mas não sabe muito sobre Rick e Morty`;
       limparFoto()
@@ -175,7 +181,7 @@ const episodeVerify = (event) => {
       const chulambes= document.createElement('img');
       chulambes.src = './img/r25.gif';
       charImgElement.appendChild(chulambes);
-
+      createBtn();
     } else
     if (cont > 6 && cont < 10) {
       questionElement.innerText = `Você até que manja de Rick e Morty, mas não é o cara mais inteligente do universo`;
@@ -184,6 +190,7 @@ const episodeVerify = (event) => {
       const chulambes= document.createElement('img');
       chulambes.src = './img/r28.gif';
       charImgElement.appendChild(chulambes);
+      createBtn();
     }
     if (cont === 10) {
       questionElement.innerText = `Wubba Lubba Dub Dub, tu é praticamente um Rick;`
@@ -192,12 +199,20 @@ const episodeVerify = (event) => {
       const chulambes= document.createElement('img');
       chulambes.src = './img/r23.gif';
       charImgElement.appendChild(chulambes);
+      createBtn();
     }
 
   }
  }
 
+ /* const newGame = () => {
+  charImgElement.children[0].remove();
+  questionElement.children[0].remove();
+ } */
+
 window.onload = async () => {
   const teste = document.querySelector("#quiz");
-  teste.addEventListener('dblclick', generateQuestion); // so aparece o quiz após clique duplo na opçao quiz
+  teste.addEventListener('dblclick', generateQuestion); //  So aparece o quiz após clique duplo na opção quiz
+  /* const btnNewGame = document.querySelector('.btn');
+  btnNewGame.addEventListener('click', generateQuestion); */
 }
