@@ -175,7 +175,6 @@ const episodeVerify = (event) => {
       const chulambes= document.createElement('img');
       chulambes.src = './img/r25.gif';
       charImgElement.appendChild(chulambes);
-
     } else
     if (cont > 6 && cont < 10) {
       questionElement.innerText = `Você até que manja de Rick e Morty, mas não é o cara mais inteligente do universo`;
@@ -196,8 +195,28 @@ const episodeVerify = (event) => {
 
   }
  }
-
+  const Urlcharacters = "https://rickandmortyapi.com/api/character";
+  const Urllocations = "https://rickandmortyapi.com/api/location";
 window.onload = async () => {
-  const teste = document.querySelector("#quiz");
-  teste.addEventListener('dblclick', generateQuestion); // so aparece o quiz após clique duplo na opçao quiz
+  const quiz = document.querySelector("#quiz");
+  const dimensoes = document.querySelector("#dimensoes");
+  const personagens = document.querySelector("#personagens");
+  quiz.addEventListener('dblclick', generateQuestion); // so aparece o quiz após clique duplo na opçao quiz
+  // dimensoes.addEventListener('dblclick')
+  personagens.addEventListener('dblclick', async () => {
+    try {
+      const response = await fetch(Urlcharacters);
+      const data = await response.json();
+      console.log(data.results[0])
+      // for (let cont = 0; cont < 5; cont+=1) {
+      //  const image = document.createElement('img');
+      //  image.innerText = `${data[cont].results.name}`;
+      //  image.src = data[cont].origin.url
+      // personagens.appendChild(img);
+      // }
+    } catch(error) {
+      return `Algo deu errado :( \n${error}`;
+    }
+});
+
 }
