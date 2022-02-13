@@ -138,7 +138,7 @@ const episodeVerify = (event) => {
   const targetEp = event.target.lastChild.innerText;
   console.log(targetEp);
 
-  // amazena a resposta certa ou errada em uma variavel inteira, soma se acertou e diminui se errou
+  //amazena a resposta certa ou errada em uma variavel inteira, soma se acertou e diminui se errou
   if (targetEp === firstEp) {
     event.target.classList.add('right_answer');
     cont +=1;
