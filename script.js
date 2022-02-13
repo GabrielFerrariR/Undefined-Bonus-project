@@ -10,8 +10,36 @@ const generateRandomNumber = (maxNum) => {
   return numSorted;
 }
 
-const fetchData = async (data, id) => {
-  const url = `${urlBase}${data}/${id}`;
+const genArrayRandomNumbers3 = (max) => {
+  const maxNum = 3;
+  let arrayNumbers = [];
+  let numEntries = 0;
+  let numSorted = 0;
+
+  while (numEntries < maxNum) {  
+    numSorted = generateRandomNumber(max);
+    if (!arrayNumbers.includes(numSorted)) {  
+      arrayNumbers.push(numSorted);  
+      numEntries++;  
+    }  
+  }
+  return arrayNumbers;
+}
+
+const fetchData = async (data, param) => {
+  const url = `${urlBase}${data}/${param}`;
+  console.log(url);
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch(error) {
+    return `Algo deu errado :( \n${error}`;
+  }
+}
+
+const fetchDataQuotes = async () => {
+  const url = `https://rick-and-morty-api-phrases.herokuapp.com/phrases/pt_br`;
   console.log(url);
   try {
     const response = await fetch(url);
@@ -23,5 +51,7 @@ const fetchData = async (data, id) => {
 }
 
 window.onload = () => {
-  fetchData('character', 1).then((data) => console.log(data));
+  fetchData('episode', 1).then((data) => console.log(data));
+  fetchDataQuotes().then((data) => console.log(data));
+  console.log(genArrayRandomNumbers3(numOfCharacters));
 }
