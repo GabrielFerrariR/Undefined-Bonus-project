@@ -28,7 +28,7 @@ const generateRandomNumber = (maxNum) => {
 
 const genArrayRandomNumbers3 = (max) => {
   const maxNum = 3;
-  let arrayNumbers = [];
+  const arrayNumbers = [];
   let numEntries = 0;
   let numSorted = 0;
 
@@ -78,29 +78,7 @@ const arrayShufle = () => {
     }
   return array;
 }
-// função que busca na API
-const fetchData = async (data, id) => {
-  const url = `${urlBase}${data}/${id}`;
-  console.log(url);
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch(error) {
-    return `Algo deu errado :( \n${error}`;
-  }
-}
-const fetchData3Param = async (data, id, id2, id3, id4) => {
-  const url = `${urlBase}${data}/${id},${id2},${id3},${id4}`;
-  console.log(url);
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch(error) {
-    return `Algo deu errado :( \n${error}`;
-  }
-}
+// }
 // Gera a pergunta com base em um personagem aleatório
 let firstEp;
 const generateQuestion = async () => {
@@ -131,7 +109,10 @@ const generateDivs = () => {
 }
 // Função responsavel por chamar as respostas
 const generateAnswers = async (rightAnswer) => {
-  const data = await fetchData3Param('episode', generateRandomNumber(numOfEpisodes), generateRandomNumber(numOfEpisodes), generateRandomNumber(numOfEpisodes), rightAnswer);
+  const epArrays = genArrayRandomNumbers3(numOfEpisodes);
+  epArrays.push(rightAnswer)
+  console.log(epArrays)
+  const data = await fetchData('episode', epArrays);
   const array = arrayShufle();
   generateDivs()
   const answerElement = document.querySelectorAll('.answer');
