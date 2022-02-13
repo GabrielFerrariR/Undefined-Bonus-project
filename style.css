@@ -176,6 +176,14 @@ nav {
 }
 
 .nav-conatiner img:hover {
-  height: 100px;
-  
+  height: 100px; 
+}
+.ep_number {
+  display: none;
+}
+.right_answer {
+  background-color: var(--azul);
+}
+.wrong_answer {
+  background-color: red;
 }
