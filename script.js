@@ -100,7 +100,7 @@ const generateAnswers = async (rightAnswer) => {
   const data = await fetchData3Param('episode', generateRandomNumber(numOfEpisodes), generateRandomNumber(numOfEpisodes), generateRandomNumber(numOfEpisodes), rightAnswer);
   const array = arrayShufle();
   data.forEach((ep, index) => {
-    const {name, episode} = ep
+    const {name, episode} = ep;
     answerElement[array[index]].innerText = `${name} - ${episode}`;
   })
 }
