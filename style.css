@@ -21,7 +21,7 @@ body, html {
 }
 
 main {
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 .Title-logo {
@@ -32,20 +32,15 @@ main {
 
 .Title-logo h1 {
   position: absolute;
-  transform: translateY(220px);
+  transform: translateY(150px);
 }
 
 header img {
-  height: 350px;
+  height: 200px;
 }
 
 header {
   background-color: black;
-}
-
-#loading-data {
-  color: #d4cabe;
-  font-size: xx-large;
 }
   
 h1 {
@@ -53,7 +48,7 @@ h1 {
   font-weight: normal;
   font-style: normal;
   color: var(--azul);
-  font-size: 3.2rem;
+  font-size: 2.8rem;
   color: var(--azul);
   text-shadow: 0px 0px 6px #98c65e;
   -webkit-text-stroke-width: 0.5px;
@@ -73,7 +68,7 @@ h1 {
 
 h2 {
   color: var(--azul2);
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-align: center;
   margin-bottom: 10px;
   font-family: 'Permanent Marker', cursive;
@@ -86,18 +81,15 @@ h2 {
 
 .img-container {
   background-color: #d4cabe;
-  width: 30%;
+  width: 200px;
   height: 200px;
+  display: flex;
+  flex-direction: column;
 }
 
 #portal-gun {
   float:right;
   height: 50px;
-}
-
-img-container {
-  display: flex;
-  flex-direction: column;
 }
 
 .answer {
@@ -122,20 +114,20 @@ img-container {
 footer {
   display: flex;
   justify-content: right;
-  height: 200px;
+  height: 50px;
   align-items: flex-end;
   opacity: 0.7;
-  margin-top: 50px;
+  margin-top: 40px;
 
 }
 
 footer img {
-  height: 150px;
+  height: 100px;
 }
 
 footer p {
   color: var(--verde);
-  font-size: 1rem;
+  font-size: 0.6rem;
 }
 
 .selected {
@@ -153,7 +145,7 @@ nav {
 }
 
 .nav-conatiner img {
-  height: 80px;
+  height: 70px;
   cursor: pointer;
 }
 
@@ -162,7 +154,7 @@ nav {
   font-weight: normal;
   font-style: normal;
   color: var(--azul);
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: var(--azul);
   text-shadow: 0px 0px 6px #98c65e;
   -webkit-text-stroke-width: 0.5px;
@@ -172,11 +164,19 @@ nav {
 .nav-conatiner {
   display: flex;
   flex-wrap: wrap;
-  width: 120px;
+  width: 100px;
   justify-content: center;
 }
 
 .nav-conatiner img:hover {
-  height: 100px;
-  
+  height: 100px; 
+}
+.ep_number {
+  display: none;
+}
+.right_answer {
+  background-color: var(--azul);
+}
+.wrong_answer {
+  background-color: red;
 }
