@@ -58,7 +58,7 @@ const generateQuestion = async () => {
   const {name, image, episode} = data;
   const firstEp = episode[0].match(/episode\/(.*)/)[1];
   console.log(data,'outro console', name, image, firstEp);
-  questionElement.innerText = `O personagem ${name} apareceu pela primeira vez no episódio:`;
+  questionElement.innerText = `O personagem ${name} apareceu em qual episódio:`;
   const img = generateImg('img', image);
   charImgElement.appendChild(img);
   await generateAnswers(firstEp)
