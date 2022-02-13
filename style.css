@@ -42,11 +42,6 @@ header img {
 header {
   background-color: black;
 }
-
-#loading-data {
-  color: #d4cabe;
-  font-size: xx-large;
-}
   
 h1 {
   font-family: 'get_schwiftyregular';
@@ -88,16 +83,13 @@ h2 {
   background-color: #d4cabe;
   width: 200px;
   height: 200px;
+  display: flex;
+  flex-direction: column;
 }
 
 #portal-gun {
   float:right;
   height: 50px;
-}
-
-img-container {
-  display: flex;
-  flex-direction: column;
 }
 
 .answer {
