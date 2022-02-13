@@ -1,4 +1,4 @@
-const urlBase = "https://rickandmortyapi.com/api/";
+const urlBase = "https://rickandmortyapi.com/api";
 const numOfCharacters = 826;
 const numOfLocations = 126;
 const numOfEpisodes = 51;
@@ -11,12 +11,53 @@ const generateImg = (tag, url) => {
   element.src = url
   return element
 }
+
 const generateRandomNumber = (maxNum) => {
   const min = 1;
   const max = maxNum;
   const numSorted = Math.floor(Math.random() * (max - min + 1)) + min;
   return numSorted;
 }
+
+const genArrayRandomNumbers3 = (max) => {
+  const maxNum = 3;
+  let arrayNumbers = [];
+  let numEntries = 0;
+  let numSorted = 0;
+
+  while (numEntries < maxNum) {  
+    numSorted = generateRandomNumber(max);
+    if (!arrayNumbers.includes(numSorted)) {  
+      arrayNumbers.push(numSorted);  
+      numEntries++;  
+    }  
+  }
+  return arrayNumbers;
+}
+
+const fetchData = async (data, param) => {
+  const url = `${urlBase}/${data}/${param}`;
+  console.log(url);
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch(error) {
+    return `Algo deu errado :( \n${error}`;
+  }
+}
+
+const fetchDataQuotes = async () => {
+  const url = `https://rick-and-morty-api-phrases.herokuapp.com/phrases/pt_br`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch(error) {
+    return `Algo deu errado :( \n${error}`;
+  }
+}
+
 /* Randomize array in-place using Durstenfeld shuffle algorithm */
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 const arrayShufle = () => {
@@ -31,17 +72,7 @@ const arrayShufle = () => {
   }
   return array;
 }
-const fetchData = async (data, id) => {
-  const url = `${urlBase}${data}/${id}`;
-  console.log(url);
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch(error) {
-    return `Algo deu errado :( \n${error}`;
-  }
-}
+
 const fetchData3Param = async (data, id, id2, id3, id4) => {
   const url = `${urlBase}${data}/${id},${id2},${id3},${id4}`;
   console.log(url);
@@ -53,6 +84,7 @@ const fetchData3Param = async (data, id, id2, id3, id4) => {
     return `Algo deu errado :( \n${error}`;
   }
 }
+
 const generateQuestion = async () => {
   const data = await fetchData('character', generateRandomNumber(826));
   const {name, image, episode} = data;
@@ -63,6 +95,7 @@ const generateQuestion = async () => {
   charImgElement.appendChild(img);
   await generateAnswers(firstEp)
 }
+
 const generateAnswers = async (rightAnswer) => {
   const data = await fetchData3Param('episode', generateRandomNumber(numOfEpisodes), generateRandomNumber(numOfEpisodes), generateRandomNumber(numOfEpisodes), rightAnswer);
   const array = arrayShufle();
@@ -70,9 +103,9 @@ const generateAnswers = async (rightAnswer) => {
     const {name, episode} = ep
     answerElement[array[index]].innerText = `${name} - ${episode}`;
   })
-}  
+}
+ 
 window.onload = async () => {
   fetchData('character', 1).then((data) => console.log(data));
   await generateQuestion();
-  
 }
