@@ -124,10 +124,10 @@ const generateAnswers = async (rightAnswer) => {
   })
 }
 
-const limparFoto = () => {
-  charImgElement.children[0].remove();
+const limparFoto = () => { // funçao que retira a imagem do quiz
+  charImgElement.children[0].remove(); 
 }
-const limparQuestoes = () => {
+const limparQuestoes = () => { // funçao que retira as questoes do quiz
   ansContainer.children[0].remove();
   ansContainer.children[1].remove();
   ansContainer.children[0].remove();
@@ -137,6 +137,8 @@ const limparQuestoes = () => {
 const episodeVerify = (event) => {
   const targetEp = event.target.lastChild.innerText;
   console.log(targetEp);
+
+  // amazena a resposta certa ou errada em uma variavel inteira, soma se acertou e diminui se errou
   if (targetEp === firstEp) {
     event.target.classList.add('right_answer');
     cont +=1;
@@ -147,12 +149,14 @@ const episodeVerify = (event) => {
     cont -= 1;
     cont2+=1;
   }
+
+  // enquanto nao foi as 10 questoes apos escolher uma alternativa limpa a foto e as questoes e chama uma nova foto e novas questoes
   if (cont2 < 10 ) {
   limparFoto();
   limparQuestoes();
   generateQuestion();
   }
-  else{
+  else{ // quando finalizar as 10 questoes aparece uma frase de acordo com a pontuaçao
     if (cont < 1) {
     questionElement.innerText = `Você foi muito mal, ta parecendo um Jerry`;
    limparFoto()
@@ -195,5 +199,5 @@ const episodeVerify = (event) => {
 
 window.onload = async () => {
   const teste = document.querySelector("#quiz");
-  teste.addEventListener('dblclick', generateQuestion);
+  teste.addEventListener('dblclick', generateQuestion); // so aparece o quiz após clique duplo na opçao quiz
 }
