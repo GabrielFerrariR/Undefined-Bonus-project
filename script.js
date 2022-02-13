@@ -3,15 +3,24 @@ const numOfCharacters = 826;
 const numOfLocations = 126;
 const numOfEpisodes = 51;
 const questionElement = document.getElementById('question-text');
-const answerElement = document.getElementsByClassName('answer');
 const charImgElement = document.querySelector('.img-container');
-
+const ansContainer = document.querySelector('.answers-container')
+let cont = 0;
+let cont2 = 0;
+// Gera a imagem do personagem
 const generateImg = (tag, url) => {
   const element = document.createElement(tag);
   element.src = url
   return element
 }
-
+// cria elementos variados a partir dos parametros dados
+const createElement = (element, className, innerText) => {
+  const e = document.createElement(element);
+  e.className = className;
+  e.innerText = innerText;
+  return e;
+}
+// Gera um número aleatório que será usado para chamar a API
 const generateRandomNumber = (maxNum) => {
   const min = 1;
   const max = maxNum;
@@ -21,7 +30,7 @@ const generateRandomNumber = (maxNum) => {
 
 const genArrayRandomNumbers3 = (max) => {
   const maxNum = 3;
-  let arrayNumbers = [];
+  const arrayNumbers = [];
   let numEntries = 0;
   let numSorted = 0;
 
@@ -60,52 +69,131 @@ const fetchDataQuotes = async () => {
 
 /* Randomize array in-place using Durstenfeld shuffle algorithm */
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+// Embaralha um array que será usado para adicionar as respostas em ordem aleatória
 const arrayShufle = () => {
   const array = [0,1,2,3]
-  function shuffleArray(array) {
   for (let index = array.length - 1; index > 0; index--) {
       let j = Math.floor(Math.random() * (index + 1));
       let temp = array[index];
       array[index] = array[j];
       array[j] = temp;
     }
-  }
   return array;
 }
-
-const fetchData3Param = async (data, id, id2, id3, id4) => {
-  const url = `${urlBase}${data}/${id},${id2},${id3},${id4}`;
-  console.log(url);
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch(error) {
-    return `Algo deu errado :( \n${error}`;
-  }
-}
-
+// }
+// Gera a pergunta com base em um personagem aleatório
+let firstEp;
 const generateQuestion = async () => {
   const data = await fetchData('character', generateRandomNumber(826));
   const {name, image, episode} = data;
-  const firstEp = episode[0].match(/episode\/(.*)/)[1];
-  console.log(data,'outro console', name, image, firstEp);
-  questionElement.innerText = `O personagem ${name} apareceu em qual episódio:`;
+  firstEp = episode[0].match(/episode\/(.*)/)[1];
+  questionElement.innerText = `O personagem ${name} apareceu pela primeira vez no episódio:`;
   const img = generateImg('img', image);
   charImgElement.appendChild(img);
   await generateAnswers(firstEp)
 }
-
-const generateAnswers = async (rightAnswer) => {
-  const data = await fetchData3Param('episode', generateRandomNumber(numOfEpisodes), generateRandomNumber(numOfEpisodes), generateRandomNumber(numOfEpisodes), rightAnswer);
-  const array = arrayShufle();
-  data.forEach((ep, index) => {
-    const {name, episode} = ep;
-    answerElement[array[index]].innerText = `${name} - ${episode}`;
+// Gera a span com as respostas 
+const generateSpan = async (array, index, id, name, episode) => {
+  const answerElement = document.querySelectorAll('.answer');
+  answerElement[array[index]].innerText = `${name} - ${episode}`
+  const span = createElement('span', 'ep_number', id);
+  answerElement[array[index]].appendChild(span);
+  answerElement.forEach((element) => {
+    element.addEventListener('click', episodeVerify)
   })
 }
- 
+// Gera as divs do answer-container dinamicamente
+const generateDivs = () => {
+  for (let index = 0; index < 4; index +=1) {
+    const div = createElement('div', 'answer');
+    ansContainer.appendChild(div);
+  }
+}
+// Função responsavel por chamar as respostas
+const generateAnswers = async (rightAnswer) => {
+  const epArrays = genArrayRandomNumbers3(numOfEpisodes);
+  epArrays.push(rightAnswer)
+  console.log(epArrays)
+  const data = await fetchData('episode', epArrays);
+  const array = arrayShufle();
+  generateDivs()
+  const answerElement = document.querySelectorAll('.answer');
+  data.forEach((ep, index) => {
+    const {name, episode, id} = ep
+    generateSpan(array, index, id, name, episode);
+  })
+}
+
+const limparFoto = () => {
+  charImgElement.children[0].remove();
+}
+const limparQuestoes = () => {
+  ansContainer.children[0].remove();
+  ansContainer.children[1].remove();
+  ansContainer.children[0].remove();
+  ansContainer.children[0].remove();
+}
+// função que verifica se a resposta está certa ou errada
+const episodeVerify = (event) => {
+  const targetEp = event.target.lastChild.innerText;
+  console.log(targetEp);
+  if (targetEp === firstEp) {
+    event.target.classList.add('right_answer');
+    cont +=1;
+    cont2+=1;
+  }
+  else {
+    event.target.classList.add('wrong_answer');
+    cont -= 1;
+    cont2+=1;
+  }
+  if (cont2 < 10 ) {
+  limparFoto();
+  limparQuestoes();
+  generateQuestion();
+  }
+  else{
+    if (cont < 1) {
+    questionElement.innerText = `Você foi muito mal, ta parecendo um Jerry`;
+   limparFoto()
+   limparQuestoes();
+   const chulambes= document.createElement('img');
+   chulambes.src = './img/r24.gif';
+   chulambes.style.height = "500px";
+   chulambes.style.width = "600px";
+   charImgElement.appendChild(chulambes);
+  
+    } else
+    if (cont > 1 && cont < 6) {
+      questionElement.innerText = `Você foi até razoavel, mas não sabe muito sobre Rick e Morty`;
+      limparFoto()
+      limparQuestoes();
+      const chulambes= document.createElement('img');
+      chulambes.src = './img/r25.gif';
+      charImgElement.appendChild(chulambes);
+
+    } else
+    if (cont > 6 && cont < 10) {
+      questionElement.innerText = `Você até que manja de Rick e Morty, mas não é o cara mais inteligente do universo`;
+      limparFoto()
+      limparQuestoes();
+      const chulambes= document.createElement('img');
+      chulambes.src = './img/r28.gif';
+      charImgElement.appendChild(chulambes);
+    }
+    if (cont === 10) {
+      questionElement.innerText = `Wubba Lubba Dub Dub, tu é praticamente um Rick;`
+      limparFoto()
+      limparQuestoes();
+      const chulambes= document.createElement('img');
+      chulambes.src = './img/r23.gif';
+      charImgElement.appendChild(chulambes);
+    }
+
+  }
+ }
+
 window.onload = async () => {
-  fetchData('character', 1).then((data) => console.log(data));
-  await generateQuestion();
+  const teste = document.querySelector("#quiz");
+  teste.addEventListener('dblclick', generateQuestion);
 }

@@ -80,9 +80,8 @@ h2 {
 }
 
 .img-container {
-  background-color: #d4cabe;
-  width: 200px;
-  height: 200px;
+  width: 400px;
+  height: 400px;
   display: flex;
   flex-direction: column;
 }
@@ -169,6 +168,14 @@ nav {
 }
 
 .nav-conatiner img:hover {
-  height: 80px;
-  
+  height: 100px; 
+}
+.ep_number {
+  display: none;
+}
+.right_answer {
+  background-color: var(--azul);
+}
+.wrong_answer {
+  background-color: red;
 }
