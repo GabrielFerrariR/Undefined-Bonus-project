@@ -15,11 +15,11 @@ const generateImg = (tag, url) => {
   element.src = url
   return element
 }
-const generateQuestionImg = () => {
-  const img = generateImg('img', '../img/r7.png' );
-  img.id = "portal-gun";
-  questionContainerElement.prepend(img);
-}
+// const generateQuestionImg = () => {
+//   const img = generateImg('img', '../img/r7.png' );
+//   img.id = "portal-gun";
+//   questionContainerElement.prepend(img);
+// }
 // cria elementos variados a partir dos parametros dados
 const createElement = (element, className, innerText) => {
   const e = document.createElement(element);
