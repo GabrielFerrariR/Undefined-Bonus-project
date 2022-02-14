@@ -34,12 +34,12 @@ const genArrayRandomNumbers3 = (max) => {
   let numEntries = 0;
   let numSorted = 0;
 
-  while (numEntries < maxNum) {  
+  while (numEntries < maxNum) {
     numSorted = generateRandomNumber(max);
-    if (!arrayNumbers.includes(numSorted)) {  
-      arrayNumbers.push(numSorted);  
-      numEntries++;  
-    }  
+    if (!arrayNumbers.includes(numSorted)) {
+      arrayNumbers.push(numSorted);
+      numEntries++;
+    }
   }
   return arrayNumbers;
 }
@@ -51,7 +51,7 @@ const fetchData = async (data, param) => {
     const response = await fetch(url);
     const data = await response.json();
     return data;
-  } catch(error) {
+  } catch (error) {
     return `Algo deu errado :( \n${error}`;
   }
 }
@@ -62,7 +62,7 @@ const fetchDataQuotes = async () => {
     const response = await fetch(url);
     const data = await response.json();
     return data;
-  } catch(error) {
+  } catch (error) {
     return `Algo deu errado :( \n${error}`;
   }
 }
@@ -71,21 +71,22 @@ const fetchDataQuotes = async () => {
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 // Embaralha um array que será usado para adicionar as respostas em ordem aleatória
 const arrayShufle = () => {
-  const array = [0,1,2,3]
+  const array = [0, 1, 2, 3]
   for (let index = array.length - 1; index > 0; index--) {
-      let j = Math.floor(Math.random() * (index + 1));
-      let temp = array[index];
-      array[index] = array[j];
-      array[j] = temp;
-    }
+    let j = Math.floor(Math.random() * (index + 1));
+    let temp = array[index];
+    array[index] = array[j];
+    array[j] = temp;
+  }
   return array;
 }
 // }
 // Gera a pergunta com base em um personagem aleatório
 let firstEp;
 const generateQuestion = async () => {
+  limparPerson();
   const data = await fetchData('character', generateRandomNumber(826));
-  const {name, image, episode} = data;
+  const { name, image, episode } = data;
   firstEp = episode[0].match(/episode\/(.*)/)[1];
   questionElement.innerText = `O personagem ${name} apareceu pela primeira vez no episódio:`;
   const img = generateImg('img', image);
@@ -104,7 +105,7 @@ const generateSpan = async (array, index, id, name, episode) => {
 }
 // Gera as divs do answer-container dinamicamente
 const generateDivs = () => {
-  for (let index = 0; index < 4; index +=1) {
+  for (let index = 0; index < 4; index += 1) {
     const div = createElement('div', 'answer');
     ansContainer.appendChild(div);
   }
@@ -119,19 +120,28 @@ const generateAnswers = async (rightAnswer) => {
   generateDivs()
   const answerElement = document.querySelectorAll('.answer');
   data.forEach((ep, index) => {
-    const {name, episode, id} = ep
+    const { name, episode, id } = ep
     generateSpan(array, index, id, name, episode);
   })
 }
 
 const limparFoto = () => { // funçao que retira a imagem do quiz
-  charImgElement.children[0].remove(); 
+  if(charImgElement.children[0]) {
+  charImgElement.children[0].remove();
+  }
+}
+const limparTexto = () => {
+  if(questionElement.innerText) {
+    questionElement.innerText = '';
+  }
 }
 const limparQuestoes = () => { // funçao que retira as questoes do quiz
+  if (ansContainer.children[0]) {
   ansContainer.children[0].remove();
   ansContainer.children[1].remove();
   ansContainer.children[0].remove();
   ansContainer.children[0].remove();
+  }
 }
 // função que verifica se a resposta está certa ou errada
 const episodeVerify = (event) => {
@@ -141,13 +151,13 @@ const episodeVerify = (event) => {
   //amazena a resposta certa ou errada em uma variavel inteira, soma se acertou e diminui se errou
   if (targetEp === firstEp) {
     event.target.classList.add('right_answer');
-    cont +=1;
-    cont2+=1;
+    cont += 1;
+    cont2 += 1;
   }
   else {
     event.target.classList.add('wrong_answer');
     cont -= 1;
-    cont2+=1;
+    cont2 += 1;
   }
   //Cria botão com a opção de jogar novamente após finalização da partida
   const createBtn = () => {
@@ -157,62 +167,62 @@ const episodeVerify = (event) => {
     ansContainer.appendChild(btn);
   };
   // enquanto nao foi as 10 questoes apos escolher uma alternativa limpa a foto e as questoes e chama uma nova foto e novas questoes
-  if (cont2 < 10 ) {
-  limparFoto();
-  limparQuestoes();
-  generateQuestion();
-  }
-  else{ // quando finalizar as 10 questoes aparece uma frase de acordo com a pontuaçao
-    if (cont < 1) {
-    questionElement.innerText = `Você foi muito mal, ta parecendo um Jerry`;
-    limparFoto()
+  if (cont2 < 10) {
+    limparFoto();
     limparQuestoes();
-    const chulambes= document.createElement('img');
-    chulambes.src = './img/r24.gif';
-    charImgElement.appendChild(chulambes);
-    createBtn(); // insere o botao apos termino do quiz
-    const btnNewGame = document.querySelector('.btn');
-    btnNewGame.addEventListener('click',newGame);
-    } else
-    if (cont > 1 && cont < 6) {
-      questionElement.innerText = `Você foi até razoavel, mas não sabe muito sobre Rick e Morty`;
+    generateQuestion();
+  }
+  else { // quando finalizar as 10 questoes aparece uma frase de acordo com a pontuaçao
+    if (cont < 1) {
+      questionElement.innerText = `Você foi muito mal, ta parecendo um Jerry`;
       limparFoto()
       limparQuestoes();
-      const chulambes= document.createElement('img');
-      chulambes.src = './img/r25.gif';
+      const chulambes = document.createElement('img');
+      chulambes.src = './img/r24.gif';
       charImgElement.appendChild(chulambes);
       createBtn(); // insere o botao apos termino do quiz
       const btnNewGame = document.querySelector('.btn');
-    btnNewGame.addEventListener('click',newGame);
+      btnNewGame.addEventListener('click', newGame);
     } else
-    if (cont > 6 && cont < 10) {
-      questionElement.innerText = `Você até que manja de Rick e Morty, mas não é o cara mais inteligente do universo`;
-      limparFoto()
-      limparQuestoes();
-      const chulambes= document.createElement('img');
-      chulambes.src = './img/r28.gif';
-      charImgElement.appendChild(chulambes);
-      createBtn();// insere o botao apos termino do quiz
-      const btnNewGame = document.querySelector('.btn');
-    btnNewGame.addEventListener('click',newGame);
-    }
+      if (cont > 1 && cont < 6) {
+        questionElement.innerText = `Você foi até razoavel, mas não sabe muito sobre Rick e Morty`;
+        limparFoto()
+        limparQuestoes();
+        const chulambes = document.createElement('img');
+        chulambes.src = './img/r25.gif';
+        charImgElement.appendChild(chulambes);
+        createBtn(); // insere o botao apos termino do quiz
+        const btnNewGame = document.querySelector('.btn');
+        btnNewGame.addEventListener('click', newGame);
+      } else
+        if (cont > 6 && cont < 10) {
+          questionElement.innerText = `Você até que manja de Rick e Morty, mas não é o cara mais inteligente do universo`;
+          limparFoto()
+          limparQuestoes();
+          const chulambes = document.createElement('img');
+          chulambes.src = './img/r28.gif';
+          charImgElement.appendChild(chulambes);
+          createBtn();// insere o botao apos termino do quiz
+          const btnNewGame = document.querySelector('.btn');
+          btnNewGame.addEventListener('click', newGame);
+        }
     if (cont === 10) {
       questionElement.innerText = `Wubba Lubba Dub Dub, tu é praticamente um Rick;`
       limparFoto()
       limparQuestoes();
-      const chulambes= document.createElement('img');
+      const chulambes = document.createElement('img');
       chulambes.src = './img/r23.gif';
       charImgElement.appendChild(chulambes);
       createBtn(); // insere o botao apos termino do quiz
       const btnNewGame = document.querySelector('.btn');
-     btnNewGame.addEventListener('click',newGame);
+      btnNewGame.addEventListener('click', newGame);
     }
 
   }
- }
+}
 
- // funçao que gera um novo quiz apos clicar no botao jogar novamente
- const newGame = () => {
+// funçao que gera um novo quiz apos clicar no botao jogar novamente
+const newGame = () => {
   const btnNewGame = document.querySelector('.btn');
   charImgElement.firstChild.remove();
   questionElement.firstChild.remove();
@@ -220,10 +230,30 @@ const episodeVerify = (event) => {
   generateQuestion();
   cont = 0;
   cont2 = 0;
- }
+}
 
-  const Urlcharacters = "https://rickandmortyapi.com/api/character";
-  // const Urllocations = "https://rickandmortyapi.com/api/location";
+const Urlcharacters = "https://rickandmortyapi.com/api/character";
+// const Urllocations = "https://rickandmortyapi.com/api/location";
+const teste = document.querySelectorAll("#imagemPerson");
+const colocarPerson = document.querySelector("#lugarPerson");
+
+limparPerson = async() => {
+  if(colocarPerson.children) {
+    colocarPerson.children[0].remove();
+    colocarPerson.children[1].remove();
+    colocarPerson.children[2].remove();
+    colocarPerson.children[3].remove();
+    colocarPerson.children[4].remove();
+    charImgElement.children[0].remove();
+    charImgElement.children[1].remove();
+    charImgElement.children[0].remove();
+    charImgElement.children[1].remove();
+    charImgElement.children[0].remove();
+    charImgElement.children[1].remove();
+
+
+  }
+}
 
 
 window.onload = async () => {
@@ -233,23 +263,29 @@ window.onload = async () => {
   quiz.addEventListener('dblclick', generateQuestion); // so aparece o quiz após clique duplo na opçao quiz
   // dimensoes.addEventListener('dblclick')
   personagens.addEventListener('dblclick', async () => {
+    limparFoto();
+    limparQuestoes();
+    limparTexto();
     try {
       const response = await fetch(Urlcharacters);
       const data = await response.json();
       console.log(data.results[0])
-      for (let cont3 = 0; cont3 < 5; cont3+=1) {
-       const image = document.createElement('img');
-       console.log(data.results[cont3].name)
-       image.innerText = `${data.results[cont3].location.name}`;
-       console.log()
-       image.src = data.results[cont3].image;
-       const colocarPerson = document.querySelector("#lugarPerson");
-        colocarPerson.appendChild(image);
+      for (let cont3 = 0; cont3 < 5; cont3 += 1) {
+        const image = document.createElement('img');
+        const teste = document.querySelectorAll("#principais");
+        image.src = data.results[cont3].image;
+        image.innerText = `${data.results[cont3].name}`;       
+          teste[cont3].innerText = `${data.results[cont3].name}`;
+        image.id = 'imagemPerson';
+        const colocarPerson = document.querySelector("#lugarPerson");
+         colocarPerson.appendChild(teste[cont3]);
+         colocarPerson.appendChild(image);
       }
-    } catch(error) {
+   
+    } catch (error) {
       return `Algo deu errado :( \n${error}`;
     }
-});
+  });
 }
 
- 
+
