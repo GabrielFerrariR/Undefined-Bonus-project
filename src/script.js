@@ -68,65 +68,65 @@ const takeIdOfString = (string) => {
   return string.split('/').at(-1);
 }
 
-const askFirstEpisode = async (character, episode) => {
-  const arrayOfDivs = [];
-  const idFirstEpisode = takeIdOfString(episode[0]);
-  const arrayOfIdEpisodes = genArrayRandomNumbers(4, numOfEpisodes, idFirstEpisode);
-  const question = `O personagem ${character} apareceu pela primeira vez em qual episódio?`;
-  const arrayOfEpisodes = await fetchData('episode', arrayOfIdEpisodes);
-  arrayOfEpisodes.forEach((episode, index) => {
-    if (index === 0) {
-      const div = createElement('div', 'answer correct', `${episode.name} ${episode.episode}`);
-      arrayOfDivs.push(div);
-    } else {
-      const div = createElement('div', 'answer', `${episode.name} ${episode.episode}`);
-      arrayOfDivs.push(div);
-    }
-  });
-  questionElement.innerText = question;
-  shuffleArray(arrayOfDivs);
-  arrayOfDivs.forEach((div) => ansContainer.appendChild(div));
-}
+// const askFirstEpisode = async (character, episode) => {
+//   const arrayOfDivs = [];
+//   const idFirstEpisode = takeIdOfString(episode[0]);
+//   const arrayOfIdEpisodes = genArrayRandomNumbers(4, numOfEpisodes, idFirstEpisode);
+//   const question = `O personagem ${character} apareceu pela primeira vez em qual episódio?`;
+//   const arrayOfEpisodes = await fetchData('episode', arrayOfIdEpisodes);
+//   arrayOfEpisodes.forEach((episode, index) => {
+//     if (index === 0) {
+//       const div = createElement('div', 'answer correct', `${episode.name} ${episode.episode}`);
+//       arrayOfDivs.push(div);
+//     } else {
+//       const div = createElement('div', 'answer', `${episode.name} ${episode.episode}`);
+//       arrayOfDivs.push(div);
+//     }
+//   });
+//   questionElement.innerText = question;
+//   shuffleArray(arrayOfDivs);
+//   arrayOfDivs.forEach((div) => ansContainer.appendChild(div));
+// }
 
-const askOrigin = async (character, location) => {
-  const arrayOfDivs = [];
-  const idLocation = takeIdOfString(location);
-  const arrayOfIdLocations = genArrayRandomNumbers(4, numOfLocations, idLocation);
-  const question = `Qual a origem do personagem ${character}?`;
-  const arrayOfLocations = await fetchData('location', arrayOfIdLocations);
-  arrayOfLocations.forEach((location, index) => {
-    if (index === 0) {
-      const div = createElement('div', 'answer correct', `${location.name}`);
-      arrayOfDivs.push(div);
-    } else {
-      const div = createElement('div', 'answer', `${location.name}`);
-      arrayOfDivs.push(div);
-    }
-  });
-  questionElement.innerText = question;
-  shuffleArray(arrayOfDivs);
-  arrayOfDivs.forEach((div) => ansContainer.appendChild(div));
-}
+// const askOrigin = async (character, location) => {
+//   const arrayOfDivs = [];
+//   const idLocation = takeIdOfString(location);
+//   const arrayOfIdLocations = genArrayRandomNumbers(4, numOfLocations, idLocation);
+//   const question = `Qual a origem do personagem ${character}?`;
+//   const arrayOfLocations = await fetchData('location', arrayOfIdLocations);
+//   arrayOfLocations.forEach((location, index) => {
+//     if (index === 0) {
+//       const div = createElement('div', 'answer correct', `${location.name}`);
+//       arrayOfDivs.push(div);
+//     } else {
+//       const div = createElement('div', 'answer', `${location.name}`);
+//       arrayOfDivs.push(div);
+//     }
+//   });
+//   questionElement.innerText = question;
+//   shuffleArray(arrayOfDivs);
+//   arrayOfDivs.forEach((div) => ansContainer.appendChild(div));
+// }
 
-const askLocation = async (character, location) => {  
-  const arrayOfDivs = [];
-  const idLocation = takeIdOfString(location);
-  const arrayOfIdLocations = genArrayRandomNumbers(4, numOfLocations, idLocation);
-  const question = `O personagem ${character} habita em qual localidade?`;
-  const arrayOfLocations = await fetchData('location', arrayOfIdLocations);
-  arrayOfLocations.forEach((location, index) => {
-    if (index === 0) {
-      const div = createElement('div', 'answer correct', `${location.name}`);
-      arrayOfDivs.push(div);
-    } else {
-      const div = createElement('div', 'answer', `${location.name}`);
-      arrayOfDivs.push(div);
-    }
-  });
-  questionElement.innerText = question;
-  shuffleArray(arrayOfDivs);
-  arrayOfDivs.forEach((div) => ansContainer.appendChild(div));
-}
+// const askLocation = async (character, location) => {  
+//   const arrayOfDivs = [];
+//   const idLocation = takeIdOfString(location);
+//   const arrayOfIdLocations = genArrayRandomNumbers(4, numOfLocations, idLocation);
+//   const question = `O personagem ${character} habita em qual localidade?`;
+//   const arrayOfLocations = await fetchData('location', arrayOfIdLocations);
+//   arrayOfLocations.forEach((location, index) => {
+//     if (index === 0) {
+//       const div = createElement('div', 'answer correct', `${location.name}`);
+//       arrayOfDivs.push(div);
+//     } else {
+//       const div = createElement('div', 'answer', `${location.name}`);
+//       arrayOfDivs.push(div);
+//     }
+//   });
+//   questionElement.innerText = question;
+//   shuffleArray(arrayOfDivs);
+//   arrayOfDivs.forEach((div) => ansContainer.appendChild(div));
+// }
 
 const generateQuestion = async () => {
   // doing fetch of a random character
@@ -234,8 +234,8 @@ window.onload = () => {
 }
 if (typeof module !== 'undefined') {
   module.exports = {
-    askOrigin,
-    askLocation,
-    askFirstEpisode
+    numOfLocations,
+    questionElement,
+    ansContainer
   };
 }

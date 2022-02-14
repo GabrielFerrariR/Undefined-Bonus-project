@@ -1,8 +1,7 @@
 const { fetchData } = require("../src/fetchData")
 
-describe('teste',() => {
+describe('Testa se fetchData é uma função',() => {
   it('Teste', () => {
-    const call = fetchData()
-    expect(typeof fetchData).toBe('number')
+    expect(typeof fetchData).toBe('function')
   })
 })
