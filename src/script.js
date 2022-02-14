@@ -115,6 +115,7 @@ ansContainer.addEventListener("click", function (event) {
 
 const clearQuestion = () => {
   questionElement.innerText = '';
+  questionContainerElement.children[0].remove();
   charImgElement.children[0].remove(); 
   ansContainer.innerHTML = '';
 }
