@@ -64,6 +64,8 @@ const takeIdOfString = (string) => {
 }
 
 const generateQuestion = async () => {
+  charImgElement.innerHTML = '';
+  ansContainer.innerHTML = '';
   // doing fetch of a random character
   const data = await fetchData('character', generateRandomNumber(numOfCharacters));
   const { name, origin, location, image, episode } = data;
@@ -163,8 +165,22 @@ const showEndOfQuiz = (cont) => {
   createBtn();
 }
 
+const createLoading = () => {
+  const conatinerLoading = document.querySelector('.img-container');
+  const conatinerBtnLoad = document.querySelector('.answers-container');
+  const imgLoading = document.createElement('img');
+  const btnLoading = document.createElement('button');
+  imgLoading.className = 'imagem-loading';
+  imgLoading.src = './img/r29.png';
+  conatinerLoading.appendChild(imgLoading);
+  btnLoading.className = 'btn';
+  btnLoading.innerText = 'Iniciar quiz'
+  conatinerBtnLoad.appendChild(btnLoading);
+}
+createLoading();
+
 window.onload = () => {
-  const teste = document.querySelector("#quiz");
+  const teste = document.querySelector(".btn");
   teste.addEventListener('click', generateQuestion); //  So aparece o quiz após clique duplo na opção quiz
 }
 if (typeof module !== 'undefined') {
