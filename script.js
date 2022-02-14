@@ -1,4 +1,3 @@
-const urlBase = "https://rickandmortyapi.com/api";
 const numOfCharacters = 826;
 const numOfLocations = 126;
 const numOfEpisodes = 51;
@@ -33,7 +32,6 @@ const genArrayRandomNumbers3 = (max) => {
   const arrayNumbers = [];
   let numEntries = 0;
   let numSorted = 0;
-
   while (numEntries < maxNum) {  
     numSorted = generateRandomNumber(max);
     if (!arrayNumbers.includes(numSorted)) {  
@@ -44,8 +42,24 @@ const genArrayRandomNumbers3 = (max) => {
   return arrayNumbers;
 }
 
+const genArrayRandomNumbers = (sizeOfArray, maxValue, numMustBe) => {
+  const maxNum = sizeOfArray;
+  const arrayNumbers = [];
+  arrayNumbers.push(numMustBe);
+  let numEntries = 0;
+  let numSorted = 0;
+  while (numEntries < maxNum -1) {  
+    numSorted = generateRandomNumber(maxValue);
+    if (!arrayNumbers.includes(numSorted)) {  
+      arrayNumbers.push(numSorted);  
+      numEntries++;  
+    }  
+  }
+  return arrayNumbers;
+}
+
 const fetchData = async (data, param) => {
-  const url = `${urlBase}/${data}/${param}`;
+  const url = `https://rickandmortyapi.com/api/${data}/${param}`;
   console.log(url);
   try {
     const response = await fetch(url);
@@ -67,65 +81,144 @@ const fetchDataQuotes = async () => {
   }
 }
 
-/* Randomize array in-place using Durstenfeld shuffle algorithm */
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-// Embaralha um array que será usado para adicionar as respostas em ordem aleatória
-const arrayShufle = () => {
-  const array = [0,1,2,3]
-  for (let index = array.length - 1; index > 0; index--) {
-      let j = Math.floor(Math.random() * (index + 1));
-      let temp = array[index];
-      array[index] = array[j];
-      array[j] = temp;
-    }
-  return array;
-}
-// }
-// Gera a pergunta com base em um personagem aleatório
-let firstEp;
-const generateQuestion = async () => {
-  const data = await fetchData('character', generateRandomNumber(826));
-  const {name, image, episode} = data;
-  firstEp = episode[0].match(/episode\/(.*)/)[1];
-  questionElement.innerText = `O personagem ${name} apareceu pela primeira vez no episódio:`;
-  const img = generateImg('img', image);
-  charImgElement.appendChild(img);
-  await generateAnswers(firstEp)
-}
-// Gera a span com as respostas 
-const generateSpan = async (array, index, id, name, episode) => {
-  const answerElement = document.querySelectorAll('.answer');
-  answerElement[array[index]].innerText = `${name} - ${episode}`
-  const span = createElement('span', 'ep_number', id);
-  answerElement[array[index]].appendChild(span);
-  answerElement.forEach((element) => {
-    element.addEventListener('click', episodeVerify)
-  })
-}
-// Gera as divs do answer-container dinamicamente
-const generateDivs = () => {
-  for (let index = 0; index < 4; index +=1) {
-    const div = createElement('div', 'answer');
-    ansContainer.appendChild(div);
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
   }
 }
-// Função responsavel por chamar as respostas
-const generateAnswers = async (rightAnswer) => {
-  const epArrays = genArrayRandomNumbers3(numOfEpisodes);
-  epArrays.push(rightAnswer)
-  console.log(epArrays)
-  const data = await fetchData('episode', epArrays);
-  const array = arrayShufle();
-  generateDivs()
-  const answerElement = document.querySelectorAll('.answer');
-  data.forEach((ep, index) => {
-    const {name, episode, id} = ep
-    generateSpan(array, index, id, name, episode);
-  })
+
+const takeIdOfString = (string) => {
+  return string.split('/').at(-1);
+}
+
+const askFirstEpisode = async (character, episode) => {
+  const arrayOfDivs = [];
+  const idFirstEpisode = takeIdOfString(episode[0]);
+  const arrayOfIdEpisodes = genArrayRandomNumbers(4, numOfEpisodes, idFirstEpisode);
+  const question = `O personagem ${character} apareceu pela primeira vez em qual episódio?`;
+  const arrayOfEpisodes = await fetchData('episode', arrayOfIdEpisodes);
+  arrayOfEpisodes.forEach((episode, index) => {
+    if (index === 0) {
+      const div = createElement('div', 'answer correct', `${episode.name} ${episode.episode}`);
+      arrayOfDivs.push(div);
+    } else {
+      const div = createElement('div', 'answer', `${episode.name} ${episode.episode}`);
+      arrayOfDivs.push(div);
+    }
+  });
+  questionElement.innerText = question;
+  shuffleArray(arrayOfDivs);
+  arrayOfDivs.forEach((div) => ansContainer.appendChild(div));
+}
+
+const askOrigin = async (character, location) => {
+  const arrayOfDivs = [];
+  const idLocation = takeIdOfString(location);
+  const arrayOfIdLocations = genArrayRandomNumbers(4, numOfLocations, idLocation);
+  const question = `Qual a origem do personagem ${character}?`;
+  const arrayOfLocations = await fetchData('location', arrayOfIdLocations);
+  arrayOfLocations.forEach((location, index) => {
+    if (index === 0) {
+      const div = createElement('div', 'answer correct', `${location.name}`);
+      arrayOfDivs.push(div);
+    } else {
+      const div = createElement('div', 'answer', `${location.name}`);
+      arrayOfDivs.push(div);
+    }
+  });
+  questionElement.innerText = question;
+  shuffleArray(arrayOfDivs);
+  arrayOfDivs.forEach((div) => ansContainer.appendChild(div));
+}
+
+const askLocation = async (character, location) => {  
+  const arrayOfDivs = [];
+  const idLocation = takeIdOfString(location);
+  const arrayOfIdLocations = genArrayRandomNumbers(4, numOfLocations, idLocation);
+  const question = `O personagem ${character} habita em qual localidade?`;
+  const arrayOfLocations = await fetchData('location', arrayOfIdLocations);
+  arrayOfLocations.forEach((location, index) => {
+    if (index === 0) {
+      const div = createElement('div', 'answer correct', `${location.name}`);
+      arrayOfDivs.push(div);
+    } else {
+      const div = createElement('div', 'answer', `${location.name}`);
+      arrayOfDivs.push(div);
+    }
+  });
+  questionElement.innerText = question;
+  shuffleArray(arrayOfDivs);
+  arrayOfDivs.forEach((div) => ansContainer.appendChild(div));
+}
+
+const generateQuestion = async () => {
+  // doing fetch of a random character
+  const data = await fetchData('character', generateRandomNumber(numOfCharacters));
+  const {id, name, origin, location, image, episode} = data;
+  // set image of character
+  const img = generateImg('img', image);
+  charImgElement.appendChild(img);
+  // the type of question will be setted randomically
+  const typeOfQuestion = generateRandomNumber(3);
+  switch (typeOfQuestion) {
+    case 1:
+      askFirstEpisode(name, episode);      
+      break;
+    case 2:
+      askOrigin(name, origin.url);      
+      break;
+    case 3:
+      askLocation(name, location.url);      
+      break;    
+  }
+}
+//let numOfTries = 0;
+ansContainer.addEventListener("click", function (event) {        
+  //numOfTries++;
+  if (event.target.classList.contains("correct")) {
+      /* event.target.classList.remove("correct");
+      document.getElementById("answer").innerText = "Acertou!";
+      let placar = document.getElementById("score");
+      let points = parseInt(placar.innerText);
+      points +=3;
+      placar.innerText = points; */
+      event.target.classList.add('right_answer');
+      alert('Acertou!');
+      setTimeout(() => {
+        clearQuestion();
+        generateQuestion();
+      }, 1500);
+  }
+  else {
+      /* document.getElementById("answer").innerText = "Errou! Tente novamente!"; */
+      event.target.classList.add('wrong_answer');
+      alert('Errou!');
+      setTimeout(() => {
+        clearQuestion();
+        generateQuestion();
+      }, 1500);
+  }     
+});
+
+//if (numOfTries === 2) console.log('acabou o jogo'); 
+
+/* const startQuiz = () => {
+  const numOfQuestions = 10;
+  const numOfPoints = 0;
+  for (i = 1; i <= numOfQuestions; i += 1) {
+    generateQuestion();
+  } 
+} */
+
+const clearQuestion = () => {
+  questionElement.innerText = '';
+  charImgElement.children[0].remove(); 
+  ansContainer.innerHTML = '';
 }
 
 const limparFoto = () => { // funçao que retira a imagem do quiz
-  charImgElement.children[0].remove(); 
 }
 const limparQuestoes = () => { // funçao que retira as questoes do quiz
   ansContainer.children[0].remove();
@@ -201,7 +294,6 @@ const episodeVerify = (event) => {
       charImgElement.appendChild(chulambes);
       createBtn();
     }
-
   }
  }
 
@@ -212,7 +304,26 @@ const episodeVerify = (event) => {
 
 window.onload = async () => {
   const teste = document.querySelector("#quiz");
-  teste.addEventListener('dblclick', generateQuestion); //  So aparece o quiz após clique duplo na opção quiz
+  teste.addEventListener('click', generateQuestion()); //  So aparece o quiz após clique duplo na opção quiz
   /* const btnNewGame = document.querySelector('.btn');
   btnNewGame.addEventListener('click', generateQuestion); */
+  //fetchData('character',1).then((data) => console.log(data));
+  //console.log('string/12/23/34'.split('/').at(-1));
+  //console.log(takeIdOfString("https://rickandmortyapi.com/api/episode/12"));
+
+  
+  
+  /* const div1 = createElement('div', 'a');
+  const div2 = createElement('div', 'b');
+  const div3 = createElement('div', 'c');
+  const div4 = createElement('div', 'd');
+  const arrayOfDivs = [div1, div2, div3, div4];
+  shuffleArray(arrayOfDivs);
+  console.log(arrayOfDivs); */
+  //console.log(genArrayRandomNumbers(4, 51, 2));
+  /* const array = [];
+  for (i=1; i<=numOfLocations; i++) {
+    fetchData('location', i).then((data) => array.push(data));   
+  }
+  console.log(array); */
 }
