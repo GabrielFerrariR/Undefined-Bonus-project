@@ -192,6 +192,11 @@ nav {
 .wrong_answer {
   background-color: red;
 }
+
+.imagem-loading {
+  height: 400px;
+  width: 400px;
+
 /* https://cssbuttons.app/buttons/23 */
 .bn632-hover {
   width: 160px;
