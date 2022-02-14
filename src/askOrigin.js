@@ -1,11 +1,10 @@
-// const { numOfLocations, questionElement, ansContainer } = require('./script.js');
-
 const askOrigin = async (character, location) => {
   const arrayOfDivs = [];
   const idLocation = takeIdOfString(location);
   const arrayOfIdLocations = genArrayRandomNumbers(4, numOfLocations, idLocation);
   const question = `Qual a origem do personagem ${character}?`;
   const arrayOfLocations = await fetchData('location', arrayOfIdLocations);
+  generateQuestionImg();
   arrayOfLocations.forEach((location, index) => {
     if (index === 0) {
       const div = createElement('div', 'answer correct', `${location.name}`);

@@ -4,6 +4,7 @@ const askFirstEpisode = async (character, episode) => {
   const arrayOfIdEpisodes = genArrayRandomNumbers(4, numOfEpisodes, idFirstEpisode);
   const question = `O personagem ${character} apareceu pela primeira vez em qual episódio?`;
   const arrayOfEpisodes = await fetchData('episode', arrayOfIdEpisodes);
+  generateQuestionImg();
   arrayOfEpisodes.forEach((episode, index) => {
     if (index === 0) {
       const div = createElement('div', 'answer correct', `${episode.name} ${episode.episode}`);

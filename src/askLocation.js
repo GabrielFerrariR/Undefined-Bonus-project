@@ -6,6 +6,7 @@ const askLocation = async (character, location) => {
   const arrayOfIdLocations = genArrayRandomNumbers(4, numOfLocations, idLocation);
   const question = `O personagem ${character} habita em qual localidade?`;
   const arrayOfLocations = await fetchData('location', arrayOfIdLocations);
+  generateQuestionImg();
   arrayOfLocations.forEach((location, index) => {
     if (index === 0) {
       const div = createElement('div', 'answer correct', `${location.name}`);

@@ -4,6 +4,7 @@ const numOfEpisodes = 51;
 const questionElement = document.getElementById('question-text');
 const charImgElement = document.querySelector('.img-container');
 const ansContainer = document.querySelector('.answers-container');
+const questionContainerElement = document.querySelector('.question-container');
 const numOfQuestions = 3;
 let numOfTries = 0;
 let numOfQuestionsRight = 0;
@@ -13,6 +14,11 @@ const generateImg = (tag, url) => {
   const element = document.createElement(tag);
   element.src = url
   return element
+}
+const generateQuestionImg = () => {
+  const img = generateImg('img', '../img/r7.png' );
+  img.id = "portal-gun";
+  questionContainerElement.prepend(img);
 }
 // cria elementos variados a partir dos parametros dados
 const createElement = (element, className, innerText) => {
@@ -45,17 +51,6 @@ const genArrayRandomNumbers = (sizeOfArray, maxValue, numMustBe) => {
   return arrayNumbers;
 }
 
-const fetchDataQuotes = async () => {
-  const url = `https://rick-and-morty-api-phrases.herokuapp.com/phrases/pt_br`;
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch(error) {
-    return `Algo deu errado :( \n${error}`;
-  }
-}
-
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -67,66 +62,6 @@ function shuffleArray(array) {
 const takeIdOfString = (string) => {
   return string.split('/').at(-1);
 }
-
-// const askFirstEpisode = async (character, episode) => {
-//   const arrayOfDivs = [];
-//   const idFirstEpisode = takeIdOfString(episode[0]);
-//   const arrayOfIdEpisodes = genArrayRandomNumbers(4, numOfEpisodes, idFirstEpisode);
-//   const question = `O personagem ${character} apareceu pela primeira vez em qual episódio?`;
-//   const arrayOfEpisodes = await fetchData('episode', arrayOfIdEpisodes);
-//   arrayOfEpisodes.forEach((episode, index) => {
-//     if (index === 0) {
-//       const div = createElement('div', 'answer correct', `${episode.name} ${episode.episode}`);
-//       arrayOfDivs.push(div);
-//     } else {
-//       const div = createElement('div', 'answer', `${episode.name} ${episode.episode}`);
-//       arrayOfDivs.push(div);
-//     }
-//   });
-//   questionElement.innerText = question;
-//   shuffleArray(arrayOfDivs);
-//   arrayOfDivs.forEach((div) => ansContainer.appendChild(div));
-// }
-
-// const askOrigin = async (character, location) => {
-//   const arrayOfDivs = [];
-//   const idLocation = takeIdOfString(location);
-//   const arrayOfIdLocations = genArrayRandomNumbers(4, numOfLocations, idLocation);
-//   const question = `Qual a origem do personagem ${character}?`;
-//   const arrayOfLocations = await fetchData('location', arrayOfIdLocations);
-//   arrayOfLocations.forEach((location, index) => {
-//     if (index === 0) {
-//       const div = createElement('div', 'answer correct', `${location.name}`);
-//       arrayOfDivs.push(div);
-//     } else {
-//       const div = createElement('div', 'answer', `${location.name}`);
-//       arrayOfDivs.push(div);
-//     }
-//   });
-//   questionElement.innerText = question;
-//   shuffleArray(arrayOfDivs);
-//   arrayOfDivs.forEach((div) => ansContainer.appendChild(div));
-// }
-
-// const askLocation = async (character, location) => {  
-//   const arrayOfDivs = [];
-//   const idLocation = takeIdOfString(location);
-//   const arrayOfIdLocations = genArrayRandomNumbers(4, numOfLocations, idLocation);
-//   const question = `O personagem ${character} habita em qual localidade?`;
-//   const arrayOfLocations = await fetchData('location', arrayOfIdLocations);
-//   arrayOfLocations.forEach((location, index) => {
-//     if (index === 0) {
-//       const div = createElement('div', 'answer correct', `${location.name}`);
-//       arrayOfDivs.push(div);
-//     } else {
-//       const div = createElement('div', 'answer', `${location.name}`);
-//       arrayOfDivs.push(div);
-//     }
-//   });
-//   questionElement.innerText = question;
-//   shuffleArray(arrayOfDivs);
-//   arrayOfDivs.forEach((div) => ansContainer.appendChild(div));
-// }
 
 const generateQuestion = async () => {
   // doing fetch of a random character
