@@ -186,12 +186,20 @@ const clearQuestion = () => {
 
 //Cria botão com a opção de jogar novamente após finalização da partida
 const createBtn = () => {
+  const div = document.getElementById('btn');
   const btn = document.createElement('button');
   btn.innerText = 'Jogar novamente';
   btn.className = 'btn';
-  ansContainer.appendChild(btn);
+  div.appendChild(btn);
 }
-  
+
+const div = document.getElementById('btn');
+div.addEventListener('click', () => {
+  clearQuestion();
+  generateQuestion();
+  document.querySelector('.btn').remove();
+});
+
 // quando finalizar as 10 questoes aparece uma frase de acordo com a pontuaçao
 const showEndOfQuiz = (cont) => {
   console.log('entrei no end of quiz');
