@@ -4,7 +4,7 @@ const numOfEpisodes = 51;
 const questionElement = document.getElementById('question-text');
 const charImgElement = document.querySelector('.img-container');
 const ansContainer = document.querySelector('.answers-container');
-const numOfQuestions = 2;
+const numOfQuestions = 3;
 let numOfTries = 0;
 let numOfQuestionsRight = 0;
 
@@ -163,9 +163,10 @@ const generateQuestion = async () => {
 
 ansContainer.addEventListener("click", function (event) {        
   numOfTries++;
-  console.log(numOfTries);
-  console.log(numOfQuestionsRight);
+  console.log('numOfTries', numOfTries);
+  console.log('numOfQuestionsRight', numOfQuestionsRight);
   if (event.target.classList.contains("correct")) {
+      alert('Acertou!');
       event.target.classList.add('right_answer');
       numOfQuestionsRight++;
       if (numOfTries !== numOfQuestions) {
@@ -177,6 +178,7 @@ ansContainer.addEventListener("click", function (event) {
   }
   else {
       event.target.classList.add('wrong_answer');
+      alert('Errou!');
       if (numOfTries !== numOfQuestions) {
         setTimeout(() => {
           clearQuestion();
@@ -204,7 +206,7 @@ const createBtn = () => {
 // quando finalizar as 10 questoes aparece uma frase de acordo com a pontuaçao
 const showEndOfQuiz = (cont) => {
   console.log('entrei no end of quiz');
-  console.log(cont);
+  console.log('cont', cont);
   numOfTries = 0;
   numOfQuestionsRight = 0;
   clearQuestion();  
