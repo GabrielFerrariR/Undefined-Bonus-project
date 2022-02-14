@@ -1,0 +1,1 @@
+const { askOrigin, askLocation, askFirstEpisode } = require('../src/script.js')
