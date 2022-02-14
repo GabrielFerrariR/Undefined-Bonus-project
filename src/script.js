@@ -5,8 +5,7 @@ const questionElement = document.getElementById('question-text');
 const charImgElement = document.querySelector('.img-container');
 const ansContainer = document.querySelector('.answers-container');
 const questionContainerElement = document.querySelector('.question-container');
-const bliu = document.getElementsByClassName('question-container');
-const numOfQuestions = 1;
+const numOfQuestions = 10;
 let numOfTries = 0;
 let numOfQuestionsRight = 0;
 
@@ -101,7 +100,7 @@ ansContainer.addEventListener("click", function (event) {
         }, 1500);
       }
   }
-  else {
+  else if (event.target.classList.contains("wrong")) {
       event.target.classList.add('wrong_answer');
       alert('Errou!');
       if (numOfTries !== numOfQuestions) {

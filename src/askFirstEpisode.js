@@ -14,7 +14,7 @@ const askFirstEpisode = async (character, episode) => {
       const div = createElement('div', 'answer correct', `${episode.name} ${episode.episode}`);
       arrayOfDivs.push(div);
     } else {
-      const div = createElement('div', 'answer', `${episode.name} ${episode.episode}`);
+      const div = createElement('div', 'answer wrong', `${episode.name} ${episode.episode}`);
       arrayOfDivs.push(div);
     }
   });
