@@ -169,10 +169,8 @@ const episodeVerify = (event) => {
     limparQuestoes();
     const chulambes= document.createElement('img');
     chulambes.src = './img/r24.gif';
-    chulambes.style.height = "500px";
-    chulambes.style.width = "600px";
     charImgElement.appendChild(chulambes);
-    createBtn();
+    createBtn(); // insere o botao apos termino do quiz
     const btnNewGame = document.querySelector('.btn');
     btnNewGame.addEventListener('click',newGame);
     } else
@@ -183,7 +181,7 @@ const episodeVerify = (event) => {
       const chulambes= document.createElement('img');
       chulambes.src = './img/r25.gif';
       charImgElement.appendChild(chulambes);
-      createBtn();
+      createBtn(); // insere o botao apos termino do quiz
       const btnNewGame = document.querySelector('.btn');
     btnNewGame.addEventListener('click',newGame);
     } else
@@ -194,7 +192,7 @@ const episodeVerify = (event) => {
       const chulambes= document.createElement('img');
       chulambes.src = './img/r28.gif';
       charImgElement.appendChild(chulambes);
-      createBtn();
+      createBtn();// insere o botao apos termino do quiz
       const btnNewGame = document.querySelector('.btn');
     btnNewGame.addEventListener('click',newGame);
     }
@@ -205,13 +203,15 @@ const episodeVerify = (event) => {
       const chulambes= document.createElement('img');
       chulambes.src = './img/r23.gif';
       charImgElement.appendChild(chulambes);
-      createBtn();
+      createBtn(); // insere o botao apos termino do quiz
       const btnNewGame = document.querySelector('.btn');
      btnNewGame.addEventListener('click',newGame);
     }
 
   }
  }
+
+ // funçao que gera um novo quiz apos clicar no botao jogar novamente
  const newGame = () => {
   const btnNewGame = document.querySelector('.btn');
   charImgElement.firstChild.remove();
