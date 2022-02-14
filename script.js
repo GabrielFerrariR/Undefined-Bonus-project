@@ -4,7 +4,7 @@ const numOfEpisodes = 51;
 const questionElement = document.getElementById('question-text');
 const charImgElement = document.querySelector('.img-container');
 const ansContainer = document.querySelector('.answers-container');
-const numOfQuestions = 1;
+const numOfQuestions = 2;
 let numOfTries = 0;
 let numOfQuestionsRight = 0;
 
@@ -162,7 +162,9 @@ const generateQuestion = async () => {
 }
 
 ansContainer.addEventListener("click", function (event) {        
+  numOfTries++;
   console.log(numOfTries);
+  console.log(numOfQuestionsRight);
   if (event.target.classList.contains("correct")) {
       event.target.classList.add('right_answer');
       numOfQuestionsRight++;
@@ -182,7 +184,6 @@ ansContainer.addEventListener("click", function (event) {
         }, 1500);
       }
   }
-  numOfTries++;
   if (numOfTries === numOfQuestions) showEndOfQuiz(numOfQuestionsRight);      
 });
 
@@ -202,18 +203,21 @@ const createBtn = () => {
   
 // quando finalizar as 10 questoes aparece uma frase de acordo com a pontuaçao
 const showEndOfQuiz = (cont) => {
+  console.log('entrei no end of quiz');
+  console.log(cont);
   numOfTries = 0;
+  numOfQuestionsRight = 0;
   clearQuestion();  
   const chulambes= document.createElement('img');
   chulambes.style.height = "500px";
   chulambes.style.width = "600px";
-  if (cont < 1) {
+  if (cont <= 2) {
     questionElement.innerText = 'Você foi muito mal, tá parecendo um Jerry!!!';
     chulambes.src = './img/r24.gif';
-  } else if (cont > 1 && cont < 6) {
+  } else if (cont > 2 && cont <= 5) {
       questionElement.innerText = 'Você foi até que razoável, mas não sabe muito sobre Rick e Morty!';
       chulambes.src = './img/r25.gif';
-  } else if (cont > 6 && cont < 10) {
+  } else if (cont > 5 && cont <= 8) {
       questionElement.innerText = 'Você até que manja de Rick e Morty, mas não é o cara mais inteligente do universo!';
       chulambes.src = './img/r28.gif';      
   }
@@ -225,7 +229,7 @@ const showEndOfQuiz = (cont) => {
   createBtn();
 }
 
-window.onload = async () => {
+window.onload = () => {
   const teste = document.querySelector("#quiz");
   teste.addEventListener('click', generateQuestion); //  So aparece o quiz após clique duplo na opção quiz
 }
