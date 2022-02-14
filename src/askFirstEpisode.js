@@ -11,10 +11,10 @@ const askFirstEpisode = async (character, episode) => {
   // generateQuestionImg();
   arrayOfEpisodes.forEach((episode, index) => {
     if (index === 0) {
-      const div = createElement('div', 'answer correct', `${episode.name} ${episode.episode}`);
+      const div = createElement('div', 'answer correct', `${episode.name} - ${episode.episode}`);
       arrayOfDivs.push(div);
     } else {
-      const div = createElement('div', 'answer wrong', `${episode.name} ${episode.episode}`);
+      const div = createElement('div', 'answer wrong', `${episode.name} - ${episode.episode}`);
       arrayOfDivs.push(div);
     }
   });

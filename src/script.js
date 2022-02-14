@@ -5,7 +5,7 @@ const questionElement = document.getElementById('question-text');
 const charImgElement = document.querySelector('.img-container');
 const ansContainer = document.querySelector('.answers-container');
 const questionContainerElement = document.querySelector('.question-container');
-const numOfQuestions = 10;
+const numOfQuestions = 2;
 let numOfTries = 0;
 let numOfQuestionsRight = 0;
 
@@ -124,7 +124,7 @@ const createBtn = () => {
   const div = document.getElementById('btn');
   const btn = document.createElement('button');
   btn.innerText = 'Jogar novamente';
-  btn.className = 'btn';
+  btn.className = 'btn bn632-hover bn23';
   div.appendChild(btn);
 }
 
