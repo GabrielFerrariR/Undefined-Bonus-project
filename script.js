@@ -304,7 +304,7 @@ const episodeVerify = (event) => {
 
 window.onload = async () => {
   const teste = document.querySelector("#quiz");
-  teste.addEventListener('click', generateQuestion()); //  So aparece o quiz após clique duplo na opção quiz
+  teste.addEventListener('click', generateQuestion); //  So aparece o quiz após clique duplo na opção quiz
   /* const btnNewGame = document.querySelector('.btn');
   btnNewGame.addEventListener('click', generateQuestion); */
   //fetchData('character',1).then((data) => console.log(data));
