@@ -1,3 +1,7 @@
+if (typeof require !== 'undefined') {
+  const { takeIdOfString } = require('./script')
+}
+
 const askFirstEpisode = async (character, episode) => {
   const arrayOfDivs = [];
   const idFirstEpisode = takeIdOfString(episode[0]);

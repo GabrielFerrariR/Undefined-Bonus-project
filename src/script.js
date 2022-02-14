@@ -66,7 +66,7 @@ const takeIdOfString = (string) => {
 const generateQuestion = async () => {
   // doing fetch of a random character
   const data = await fetchData('character', generateRandomNumber(numOfCharacters));
-  const {id, name, origin, location, image, episode} = data;
+  const { name, origin, location, image, episode } = data;
   // set image of character
   const img = generateImg('img', image);
   charImgElement.appendChild(img);
@@ -171,6 +171,7 @@ if (typeof module !== 'undefined') {
   module.exports = {
     numOfLocations,
     questionElement,
-    ansContainer
+    ansContainer,
+    takeIdOfString
   };
 }
