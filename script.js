@@ -222,31 +222,34 @@ const episodeVerify = (event) => {
   cont2 = 0;
  }
 
-  // const Urlcharacters = "https://rickandmortyapi.com/api/character";
+  const Urlcharacters = "https://rickandmortyapi.com/api/character";
   // const Urllocations = "https://rickandmortyapi.com/api/location";
 
 
 window.onload = async () => {
   const quiz = document.querySelector("#quiz");
   // const dimensoes = document.querySelector("#dimensoes");
-  // const personagens = document.querySelector("#personagens");
+  const personagens = document.querySelector("#personagens");
   quiz.addEventListener('dblclick', generateQuestion); // so aparece o quiz após clique duplo na opçao quiz
   // dimensoes.addEventListener('dblclick')
-  // personagens.addEventListener('dblclick', async () => {
-  //   try {
-  //     const response = await fetch(Urlcharacters);
-  //     const data = await response.json();
-      // console.log(data.results[0])
-      // for (let cont = 0; cont < 5; cont+=1) {
-      //  const image = document.createElement('img');
-      //  image.innerText = `${data[cont].results.name}`;
-      //  image.src = data[cont].origin.url
-      // personagens.appendChild(img);
-      // }
-//     } catch(error) {
-//       return `Algo deu errado :( \n${error}`;
-//     }
-// });
+  personagens.addEventListener('dblclick', async () => {
+    try {
+      const response = await fetch(Urlcharacters);
+      const data = await response.json();
+      console.log(data.results[0])
+      for (let cont3 = 0; cont3 < 5; cont3+=1) {
+       const image = document.createElement('img');
+       console.log(data.results[cont3].name)
+       image.innerText = `${data.results[cont3].location.name}`;
+       console.log()
+       image.src = data.results[cont3].image;
+       const colocarPerson = document.querySelector("#lugarPerson");
+        colocarPerson.appendChild(image);
+      }
+    } catch(error) {
+      return `Algo deu errado :( \n${error}`;
+    }
+});
 }
 
  
