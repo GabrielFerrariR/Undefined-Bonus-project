@@ -1,6 +1,6 @@
-if (typeof require !== 'undefined') {
-  const { takeIdOfString } = require('./script')
-}
+// if (typeof require !== 'undefined') {
+//   const { takeIdOfString } = require('./script')
+// }
 
 const askFirstEpisode = async (character, episode) => {
   const arrayOfDivs = [];
@@ -8,7 +8,7 @@ const askFirstEpisode = async (character, episode) => {
   const arrayOfIdEpisodes = genArrayRandomNumbers(4, numOfEpisodes, idFirstEpisode);
   const question = `O personagem ${character} apareceu pela primeira vez em qual episódio?`;
   const arrayOfEpisodes = await fetchData('episode', arrayOfIdEpisodes);
-  generateQuestionImg();
+  // generateQuestionImg();
   arrayOfEpisodes.forEach((episode, index) => {
     if (index === 0) {
       const div = createElement('div', 'answer correct', `${episode.name} ${episode.episode}`);

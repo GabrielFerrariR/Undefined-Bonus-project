@@ -4,7 +4,7 @@ const askOrigin = async (character, location) => {
   const arrayOfIdLocations = genArrayRandomNumbers(4, numOfLocations, idLocation);
   const question = `Qual a origem do personagem ${character}?`;
   const arrayOfLocations = await fetchData('location', arrayOfIdLocations);
-  generateQuestionImg();
+  // generateQuestionImg();
   arrayOfLocations.forEach((location, index) => {
     if (index === 0) {
       const div = createElement('div', 'answer correct', `${location.name}`);

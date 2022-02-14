@@ -5,7 +5,8 @@ const questionElement = document.getElementById('question-text');
 const charImgElement = document.querySelector('.img-container');
 const ansContainer = document.querySelector('.answers-container');
 const questionContainerElement = document.querySelector('.question-container');
-const numOfQuestions = 3;
+const bliu = document.getElementsByClassName('question-container');
+const numOfQuestions = 1;
 let numOfTries = 0;
 let numOfQuestionsRight = 0;
 
@@ -115,7 +116,6 @@ ansContainer.addEventListener("click", function (event) {
 
 const clearQuestion = () => {
   questionElement.innerText = '';
-  questionContainerElement.children[0].remove();
   charImgElement.children[0].remove(); 
   ansContainer.innerHTML = '';
 }
