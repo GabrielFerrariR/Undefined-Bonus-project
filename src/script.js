@@ -5,7 +5,7 @@ const questionElement = document.getElementById('question-text');
 const charImgElement = document.querySelector('.img-container');
 const ansContainer = document.querySelector('.answers-container');
 const questionContainerElement = document.querySelector('.question-container');
-const numOfQuestions = 2;
+const numOfQuestions = 10;
 let numOfTries = 0;
 let numOfQuestionsRight = 0;
 
@@ -92,7 +92,6 @@ ansContainer.addEventListener("click", function (event) {
   console.log('numOfTries', numOfTries);
   console.log('numOfQuestionsRight', numOfQuestionsRight);
   if (event.target.classList.contains("correct")) {
-      alert('Acertou!');
       event.target.classList.add('right_answer');
       numOfQuestionsRight++;
       if (numOfTries !== numOfQuestions) {
@@ -104,7 +103,6 @@ ansContainer.addEventListener("click", function (event) {
   }
   else if (event.target.classList.contains("wrong")) {
       event.target.classList.add('wrong_answer');
-      alert('Errou!');
       if (numOfTries !== numOfQuestions) {
         setTimeout(() => {
           clearQuestion();
@@ -148,17 +146,17 @@ const showEndOfQuiz = (cont) => {
   chulambes.style.height = "500px";
   chulambes.style.width = "600px";
   if (cont <= 2) {
-    questionElement.innerText = 'Você foi muito mal, tá parecendo um Jerry!!!';
+    questionElement.innerText = `Você foi muito mal, acertou apenas ${cont} de 10 perguntas, tá parecendo um Jerry!!!`;
     chulambes.src = './img/r24.gif';
-  } else if (cont > 2 && cont <= 5) {
-      questionElement.innerText = 'Você foi até que razoável, mas não sabe muito sobre Rick e Morty!';
+  } else if (cont > 4 && cont <= 6) {
+      questionElement.innerText = `Você foi até que razoável, acertou ${cont} de 10 perguntas, mas não sabe muito sobre Rick e Morty!`;
       chulambes.src = './img/r25.gif';
-  } else if (cont > 5 && cont <= 8) {
-      questionElement.innerText = 'Você até que manja de Rick e Morty, mas não é o cara mais inteligente do universo!';
+  } else if (cont > 6 && cont <= 8) {
+      questionElement.innerText = `Você até que manja de Rick e Morty, acertou ${cont} de 10 perguntas, mas não é o cara mais inteligente do universo!`;
       chulambes.src = './img/r28.gif';      
   }
   else {
-    questionElement.innerText = 'Wubba Lubba Dub Dub, tu é praticamente um Rick!!!'
+    questionElement.innerText = `Wubba Lubba Dub Dub, tu é praticamente um Rick!!! Acertou ${cont} perguntas!`
     chulambes.src = './img/r23.gif';
   }
   charImgElement.appendChild(chulambes);
@@ -173,7 +171,7 @@ const createLoading = () => {
   imgLoading.className = 'imagem-loading';
   imgLoading.src = './img/r29.png';
   conatinerLoading.appendChild(imgLoading);
-  btnLoading.className = 'btn';
+  btnLoading.className = 'btn bn23 bn632-hover';
   btnLoading.innerText = 'Iniciar quiz'
   conatinerBtnLoad.appendChild(btnLoading);
 }
